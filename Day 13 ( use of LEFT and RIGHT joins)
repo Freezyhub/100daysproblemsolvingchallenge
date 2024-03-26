@@ -1,0 +1,26 @@
+-- Day 13_(Left and right Joins)
+
+-- In our ongoing SQL JOINs learning journey, let’s dive into the fascinating world of LEFT and RIGHT JOINs. These two types of joins allow us to combine data from multiple tables in powerful ways. Let’s explore:
+
+LEFT JOIN (or LEFT OUTER JOIN):
+Imagine you have two tables: Orders and Customers.
+A LEFT JOIN returns all records from the left table (Orders) and the matching records from the right table (Customers).
+If there’s no match in the right table, NULL values are filled in.
+LEFT JOIN is used when you want to include all records from the left table, even if there’s no corresponding data in the right table.
+
+RIGHT JOIN (or RIGHT OUTER JOIN):
+The opposite of LEFT JOIN, RIGHT JOIN returns all records from the right table and the matching records from the left table.
+Again, NULL values are used when there’s no match.
+RIGHT JOIN is used when you want to include all records from the right table, even if there’s no corresponding data in the left table.
+
+--Suppose we’re analyzing sales data. We want to see all orders and the corresponding customer names. If a customer hasn’t placed an order yet, we still want to include their name
+
+-- LEFT JOIN QUERY
+SELECT Orders.OrderID, Customers.CustomerName
+FROM Orders
+LEFT JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+-- RIGHT JOIN QUERY
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+RIGHT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
