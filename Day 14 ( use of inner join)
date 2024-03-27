@@ -1,0 +1,31 @@
+Day 14_( Use of inner joins)
+As a data analyst,there is high chances that you will working on multiple tables in a database, making it crucial to have a solid understanding of join operations to effectively merge and analyze data across different datasets
+
+ -- Inner Joins: Imagine you're a sales manager analyzing customer orders. Using INNER JOIN, you can combine data from "Customers" and "Orders" tables to see which customers placed orders. For example, you can find customers who made purchases in 2021.
+
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+WHERE Orders.OrderDate BETWEEN '2021-01-01' AND '2021-12-31';
+
+
+
+-- As a data analyst working with a store in lagos with multiple outlet, you are to findou Which customers purchased a product from Store A and also made a purchase from Store B within the same month?
+
+SELECT DISTINCT customer_id
+FROM sales
+INNER JOIN stores AS store_a ON sales.store_id = store_a.store_id
+INNER JOIN stores AS store_b ON sales.store_id = store_b.store_id
+WHERE store_a.store_name = 'Store A'
+AND store_b.store_name = 'Store B'
+AND MONTH(sales.purchase_date) = MONTH(CURRENT_DATE())
+
+-- You are tasked to find Which employees worked on Project X and also participated in Training Session Y during the same quarter in a manufaturing company dataset
+
+SELECT DISTINCT employee_id
+FROM employees
+INNER JOIN projects ON employees.employee_id = projects.employee_id
+INNER JOIN training_sessions ON employees.employee_id = training_sessions.employee_id
+WHERE projects.project_name = 'Project X'
+AND training_sessions.session_name = 'Training Session Y'
+AND QUARTER(projects.start_date) = QUARTER(CURRENT_DATE())
